@@ -52,7 +52,9 @@ add_action( 'edit_user_profile_update', 'umr_save_redirect' );
  * WordPress function for redirecting users based on custom user meta
  */
 function my_login_redirect( $url, $request, $user ){
-	$url = get_user_meta( get_current_user_id(), 'umr_redirect_url' );
+	if( isset( $user->ID ) ) {
+		$url = get_user_meta( $user->ID, 'umr_redirect_url', true );
+	}
 	return $url;
 }
 
